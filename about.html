@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>À propos - Virgile Allix | Artisan Numérique</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    /* === STYLES DE BASE === */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+      /* Couleurs principales */
+      --primary: #5000f5;
+      --secondary: #00bfff;
+      --accent: #ff1696;
+      --dark: #0a0a14;
+      --light: #f8f9fc;
+      
+      /* Couleurs du thème clair */
+      --bg-light: #f0f2f5;
+      --text-light: #1a1b25;
+      --card-light: #ffffff;
+      --border-light: rgba(0, 0, 0, 0.1);
+      
+      /* Couleurs du thème sombre */
+      --bg-dark: #0a0a14;
+      --text-dark: #e9eaf0;
+      --card-dark: #13131f;
+      --border-dark: rgba(255, 255, 255, 0.1);
+      
+      /* Mode initial (sombre) */
+      --bg-color: var(--bg-dark);
+      --text-color: var(--text-dark);
+      --card-color: var(--card-dark);
+      --border-color: var(--border-dark);
+      
+      /* Transitions */
+      --transition-fast: 0.2s cubic-bezier(0.5, 0, 0.15, 1);
+      --transition-normal: 0.4s cubic-bezier(0.5, 0, 0.15, 1);
+      --transition-slow: 0.8s cubic-bezier(0.5, 0, 0.15, 1);
+      
+      /* Espacement */
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 2rem;
+      --space-lg: 4rem;
+      --space-xl: 8rem;
+      
+      /* Autres */
+      --header-height: 80px;
+      --border-radius-sm: 8px;
+      --border-radius-md: 16px;
+      --border-radius-lg: 24px;
+      --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --max-width: 1400px;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary) var(--card-color);
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color var(--transition-fast);
+    }
+    
+    button, .btn {
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      background: none;
+      transition: all var(--transition-fast);
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--card-color);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+    
+    ::selection {
+      background: var(--primary);
+      color: var(--light);
+    }
+    
+    /* === UTILITAIRES === */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+    
+    .section {
+      padding: var(--space-xl) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .text-gradient {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .accent-border {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 5px;
+      display: inline-block;
+    }
+    
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border-color), transparent);
+      margin: var(--space-lg) 0;
+    }
+    
+    .text-center {
+      text-align: center;
+    }
+    
+    .blur-bg {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(80, 0, 245, 0.15), transparent 70%);
+      filter: blur(50px);
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .blur-1 {
+      top: -250px;
+      left: -100px;
+    }
+    
+    .blur-2 {
+      bottom: -200px;
+      right: -100px;
+      background: radial-gradient(circle, rgba(255, 22, 150, 0.15), transparent 70%);
+    }
+
+    /* === CHARGEMENT ET ANIMATIONS === */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity var(--transition-normal), visibility var(--transition-normal);
+    }
+    
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    .loader-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    
+    .loader-logo {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--light);
+    }
+    
+    .loader-bar {
+      width: 200px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .loader-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      animation: progress 2s ease-in-out forwards;
+    }
+    
+    @keyframes progress {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity var(--transition-normal), transform var(--transition-normal);
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* === HEADER ET NAVIGATION === */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      z-index: 100;
+      transition: background-color var(--transition-normal), box-shadow var(--transition-normal);
+    }
+    
+    .header.scrolled {
+      background-color: rgba(10, 10, 20, 0.8);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header-light.scrolled {
+      background-color: rgba(240, 242, 245, 0.8);
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .logo span {
+      color: var(--accent);
+    }
+    
+    .logo::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: var(--accent);
+      transition: width var(--transition-fast);
+    }
+    
+    .logo:hover::after {
+      width: 100%;
+    }
+    
+    .nav {
+      display: flex;
+      gap: var(--space-md);
+    }
+    
+    .nav-link {
+      position: relative;
+      font-weight: 500;
+      padding: 0.5rem 0;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: var(--accent);
+      transition: width var(--transition-fast);
+    }
+    
+    .nav-link:hover::after, 
+    .nav-link.active::after {
+      width: 100%;
+    }
+    
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    
+    .theme-toggle {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background: var(--card-color);
+      color: var(--text-color);
+      cursor: pointer;
+      transition: all var(--transition-normal);
+    }
+    
+    .theme-toggle:hover {
+      transform: rotate(20deg);
+    }
+    
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* === PAGE HEADER === */
+    .page-header {
+      height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      padding-top: var(--header-height);
+      overflow: hidden;
+    }
+    
+    .page-header-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+    
+    .page-title {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      margin-bottom: var(--space-md);
+      animation: fadeInUp 1s forwards;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .page-description {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      margin: 0 auto;
+      max-width: 700px;
+      opacity: 0;
+      animation: fadeIn 1s 0.3s forwards;
+    }
+    
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    
+    /* === SECTION BIOGRAPHIE === */
+    .about-section {
+      position: relative;
+    }
+    
+    .about-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xl);
+      align-items: center;
+    }
+    
+    .about-image {
+      flex: 1;
+      min-width: 300px;
+      position: relative;
+      transform: translateX(-50px);
+      opacity: 0;
+      animation: slideInRight 1s forwards;
+    }
+    
+    @keyframes slideInRight {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    .about-img {
+      width: 100%;
+      border-radius: var(--border-radius-lg);
+      transform: perspective(1000px) rotateY(-10deg);
+      transition: transform var(--transition-normal);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .about-image:hover .about-img {
+      transform: perspective(1000px) rotateY(0);
+    }
+    
+    .floating-shape {
+      position: absolute;
+      z-index: -1;
+      border-radius: var(--border-radius-md);
+      opacity: 0.1;
+    }
+    
+    .shape-1 {
+      width: 150px;
+      height: 150px;
+      background: var(--primary);
+      top: -30px;
+      left: -40px;
+      transform: rotate(15deg);
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    .shape-2 {
+      width: 200px;
+      height: 200px;
+      background: var(--accent);
+      bottom: -40px;
+      right: -50px;
+      transform: rotate(-15deg);
+      animation: float 8s ease-in-out infinite reverse;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(15deg); }
+      50% { transform: translateY(-15px) rotate(15deg); }
+    }
+    
+    .about-content {
+      flex: 1;
+      min-width: 300px;
+      transform: translateX(50px);
+      opacity: 0;
+      animation: slideInLeft 1s forwards 0.3s;
+    }
+    
+    @keyframes slideInLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    .about-subtitle {
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: var(--space-xs);
+      letter-spacing: 1px;
+    }
+    
+    .about-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: var(--space-md);
+      position: relative;
+    }
+    
+    .about-title::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 3px;
+      background: var(--primary);
+      bottom: -15px;
+      left: 0;
+    }
+    
+    .about-text {
+      margin: var(--space-md) 0;
+    }
+    
+    .about-text p {
+      margin-bottom: var(--space-md);
+      font-size: 1.05rem;
+    }
+    
+    .about-cta {
+      margin-top: var(--space-md);
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: var(--light);
+      box-shadow: 0 4px 15px rgba(80, 0, 245, 0.3);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(80, 0, 245, 0.5);
+    }
+    
+    /* === SECTION COMPÉTENCES === */
+    .skills-section {
+      position: relative;
+      background: var(--card-color);
+      padding: var(--space-xl) 0;
+      margin: var(--space-xl) 0;
+      border-radius: var(--border-radius-lg);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    .skills-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+    
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: var(--space-md);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background: var(--accent);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: width var(--transition-medium);
+    }
+    
+    .section-title:hover::after {
+      width: 100px;
+    }
+    
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: var(--space-lg);
+      padding: 0 var(--space-md);
+    }
+    
+    .skill-card {
+      background: var(--bg-color);
+      padding: var(--space-lg);
+      border-radius: var(--border-radius-md);
+      text-align: center;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeInUp 0.8s forwards;
+    }
+    
+    .skill-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    .skill-card:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    
+    .skill-card:nth-child(4) {
+      animation-delay: 0.6s;
+    }
+    
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      z-index: -1;
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+    
+    .skill-icon {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto var(--space-md);
+      font-size: 2.5rem;
+      color: var(--accent);
+      background: rgba(255, 22, 150, 0.1);
+      border-radius: 50%;
+      transition: all var(--transition-medium);
+    }
+    
+    .skill-card:hover .skill-icon {
+      color: var(--light);
+      background: var(--primary);
+      transform: rotateY(180deg);
+    }
+    
+    .skill-title {
+      font-size: 1.5rem;
+      margin-bottom: var(--space-sm);
+    }
+    
+    .skill-desc {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    /* === SECTION PARCOURS === */
+    .journey-section {
+      position: relative;
+      padding: var(--space-xl) 0;
+    }
+    
+    .journey-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+    
+    .timeline {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+      transform: translateX(-50%);
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: var(--space-xl);
+    }
+    
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .timeline-content {
+      width: 45%;
+      padding: var(--space-lg);
+      background: var(--card-color);
+      border-radius: var(--border-radius-md);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeInUp 0.8s forwards;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content {
+      left: 0;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content {
+      left: 55%;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content {
+      animation-delay: 0.4s;
+    }
+    
+    .timeline-dot {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: var(--primary);
+      border-radius: 50%;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      transition: all var(--transition-medium);
+    }
+    
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      top: 30px;
+      width: 30px;
+      height: 2px;
+      background: var(--accent);
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content::before {
+      right: -30px;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content::before {
+      left: -30px;
+    }
+    
+    .timeline-date {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: rgba(80, 0, 245, 0.1);
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: 20px;
+      margin-bottom: var(--space-sm);
+      font-size: 0.9rem;
+    }
+    
+    .timeline-title {
+      font-size: 1.5rem;
+      margin-bottom: var(--space-sm);
+    }
+    
+    .timeline-text {
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    /* === SECTION PROJET === */
+    .project-section {
+      position: relative;
+      background: var(--card-color);
+      padding: var(--space-xl) 0;
+      margin: var(--space-xl) 0;
+      border-radius: var(--border-radius-lg);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    .project-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+    
+    .project-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xl);
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .project-info {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .project-image {
+      flex: 1;
+      min-width: 300px;
+      position: relative;
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+    
+    .project-title {
+      font-size: 2rem;
+      margin-bottom: var(--space-md);
+      position: relative;
+    }
+    
+    .project-title::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      bottom: -10px;
+      left: 0;
+    }
+    
+    .project-subtitle {
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: var(--space-sm);
+    }
+    
+    .project-features {
+      margin: var(--space-md) 0;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .feature-icon {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-top: 0.2rem;
+    }
+    
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-md);
+    }
+    
+    .tech-badge {
+      padding: 0.4rem 1rem;
+      background: rgba(80, 0, 245, 0.1);
+      color: var(--primary);
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    /* === TESTIMONIALS === */
+    .testimonials-section {
+      padding: var(--space-xl) 0;
+      background: var(--card-color);
+      margin: var(--space-xl) 0;
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+    
+    .testimonials-slider {
+      max-width: 800px;
+      margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .testimonials-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    
+    .testimonial {
+      min-width: 100%;
+      padding: 0 var(--space-md);
+    }
+    
+    .testimonial-content {
+      background: var(--bg-color);
+      padding: var(--space-lg);
+      border-radius: var(--border-radius-md);
+      position: relative;
+      margin-bottom: var(--space-lg);
+    }
+    
+    .testimonial-content::before {
+      content: '\201C';
+      position: absolute;
+      top: -30px;
+      left: 20px;
+      font-size: 5rem;
+      color: var(--primary);
+      opacity: 0.2;
+      font-family: serif;
+      line-height: 1;
+    }
+    
+    .testimonial-content::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50px;
+      width: 30px;
+      height: 30px;
+      background: var(--bg-color);
+      transform: rotate(45deg);
+    }
+    
+    .testimonial-text {
+      font-size: 1.1rem;
+      font-style: italic;
+      margin-bottom: var(--space-md);
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-left: var(--space-md);
+    }
+    
+    .author-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    
+    .author-details h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.2rem;
+    }
+    
+    .author-position {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+    
+    .slider-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--bg-color);
+      color: var(--primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all var(--transition-medium);
+    }
+    
+    .slider-btn:hover {
+      background: var(--primary);
+      color: var(--light);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(80, 0, 245, 0.3);
+    }
+    
+    /* === CALL TO ACTION === */
+    .cta-section {
+      padding: var(--space-xl) 0;
+      text-align: center;
+      position: relative;
+      margin-top: var(--space-xl);
+    }
+    
+    .cta-content {
+      background: var(--card-color);
+      padding: var(--space-xl) var(--space-lg);
+      border-radius: var(--border-radius-lg);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
+    
+    .cta-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(80, 0, 245, 0.1), rgba(255, 22, 150, 0.1));
+      z-index: -1;
+    }
+    
+    .cta-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      margin-bottom: var(--space-md);
+    }
+    
+    .cta-text {
+      max-width: 700px;
+      margin: 0 auto var(--space-lg);
+      font-size: 1.1rem;
+    }
+    
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background: var(--primary);
+      color: var(--light);
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: 0 10px 20px rgba(80, 0, 245, 0.3);
+      transition: all var(--transition-normal);
+    }
+    
+    .cta-btn:hover {
+      background: var(--accent);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(255, 22, 150, 0.3);
+    }
+    
+    /* === FOOTER === */
+    .footer {
+      padding: var(--space-lg) 0;
+      background: var(--card-color);
+      margin-top: var(--space-xl);
+    }
+    
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-lg);
+    }
+    
+    .footer-info {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: var(--space-sm);
+      display: inline-block;
+    }
+    
+    .footer-logo span {
+      color: var(--accent);
+    }
+    
+    .footer-text {
+      margin-bottom: var(--space-md);
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: var(--space-sm);
+    }
+    
+    .social-link {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background: var(--bg-color);
+      font-size: 1.2rem;
+      transition: all var(--transition-fast);
+    }
+    
+    .social-link:hover {
+      background: var(--primary);
+      color: var(--light);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(80, 0, 245, 0.3);
+    }
+    
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+    }
+    
+    .footer-column {
+      min-width: 150px;
+    }
+    
+    .footer-column h3 {
+      font-size: 1.2rem;
+      margin-bottom: var(--space-md);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 2px;
+      bottom: -10px;
+      left: 0;
+      background: var(--accent);
+    }
+    
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    
+    .footer-nav a {
+      opacity: 0.8;
+      transition: all var(--transition-fast);
+    }
+    
+    .footer-nav a:hover {
+      opacity: 1;
+      color: var(--accent);
+      transform: translateX(5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: var(--space-lg);
+      margin-top: var(--space-lg);
+      border-top: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    /* === ANIMATIONS DE SCROLL === */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity var(--transition-normal), transform var(--transition-normal);
+    }
+    
+    .reveal-up.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity var(--transition-normal), transform var(--transition-normal);
+    }
+    
+    .reveal-left.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity var(--transition-normal), transform var(--transition-normal);
+    }
+    
+    .reveal-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    /* === RESPONSIVE === */
+    @media (max-width: 992px) {
+      :root {
+        --space-xl: 5rem;
+        --space-lg: 3rem;
+      }
+      
+      .about-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .about-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .about-cta {
+        text-align: center;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      :root {
+        --space-md: 1.5rem;
+        --space-lg: 2.5rem;
+      }
+      
+      .container {
+        padding: 0 var(--space-sm);
+      }
+      
+      .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 400px;
+        height: 100vh;
+        background: var(--card-color);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: var(--space-md);
+        transition: right var(--transition-normal);
+        z-index: 90;
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+      }
+      
+      .nav.active {
+        right: 0;
+      }
+      
+      .menu-toggle {
+        display: block;
+        z-index: 100;
+      }
+      
+      .timeline::before {
+        left: 20px;
+      }
+      
+      .timeline-content {
+        width: calc(100% - 50px);
+        left: 50px !important;
+      }
+      
+      .timeline-dot {
+        left: 20px;
+      }
+      
+      .timeline-item:nth-child(odd) .timeline-content::before,
+      .timeline-item:nth-child(even) .timeline-content::before {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="loader-logo">VA<span>.</span></div>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Virgile<span>.</span>Allix</a>
+      
+      <nav class="nav" id="nav">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="projet.html" class="nav-link">Projets</a>
+        <a href="about.html" class="nav-link active">À Propos</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      
+      <div class="nav-controls">
+        <div class="theme-toggle" id="theme-toggle">
+          <i class="fas fa-moon"></i>
+        </div>
+        
+        <div class="menu-toggle" id="menu-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- En-tête de page -->
+  <section class="page-header">
+    <div class="blur-bg blur-1"></div>
+    <div class="blur-bg blur-2"></div>
+    
+    <div class="container page-header-content">
+      <h1 class="page-title">À <span class="text-gradient">Propos</span></h1>
+      <p class="page-description">Découvrez mon parcours, mes compétences et ma vision du développement numérique.</p>
+    </div>
+  </section>
+  
+  <!-- Section Biographie -->
+  <section class="about-section section">
+    <div class="container about-container">
+      <div class="about-image">
+        <img src="https://via.placeholder.com/600x800" alt="Virgile Allix" class="about-img">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+      </div>
+      
+      <div class="about-content">
+        <span class="about-subtitle">Qui suis-je</span>
+        <h2 class="about-title">Développeur passionné en formation</h2>
+        
+        <div class="about-text">
+          <p>Je m'appelle Virgile Allix, j'ai 18 ans et je suis actuellement en première année de BTS SIO (Services Informatiques aux Organisations) option SLAM (Solutions Logicielles et Applications Métiers). Je combine ma formation avec une alternance chez MTB111 où je développe mes compétences dans un environnement professionnel.</p>
+          
+          <p>Passionné par le développement d'applications web et logicielles, j'ai choisi de poursuivre mes études après mon Bac STI2D (Sciences et Technologies de l'Industrie et du Développement Durable) pour approfondir mes connaissances en programmation et en conception de solutions informatiques.</p>
+          
+          <p>Mon objectif est de maîtriser les différentes technologies du développement web et des applications métiers pour créer des solutions innovantes qui répondent aux besoins réels des utilisateurs. Je m'intéresse particulièrement à l'amélioration des processus métiers grâce au développement logiciel.</p>
+        </div>
+        
+        <div class="about-cta">
+          <a href="contact.html" class="btn btn-primary">
+            Discutons de votre projet
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Section Compétences -->
+  <section class="skills-section">
+    <div class="container">
+      <div class="skills-header">
+        <h2 class="section-title reveal-up">Mes <span class="accent-border">Compétences</span></h2>
+      </div>
+      
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <h3 class="skill-title">Développement Web</h3>
+          <p class="skill-desc">Création de sites et applications web interactifs, avec une attention particulière à l'accessibilité et aux performances.</p>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3 class="skill-title">Développement Java</h3>
+          <p class="skill-desc">Conception et réalisation d'applications en Java, en mettant l'accent sur la qualité du code et les bonnes pratiques.</p>
+        </div>
+        
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fas fa-bezier-curve"></i>
+          </div>
+          <h3 class="skill-title">Design UI/UX</h3>
+          <p class="skill-desc">Conception d'interfaces intuitives et esthétiques qui placent l'utilisateur au centre de l'expérience digitale.</p>
+        </div>
+        
+        <div class="skill-card">
+          <div class="skill-icon">
+            <i class="fas fa-database"></i>
+          </div>
+          <h3 class="skill-title">Gestion de BDD</h3>
+          <p class="skill-desc">Conception et administration de bases de données relationnelles pour stocker et gérer efficacement les données des applications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Section Projet Professionnel -->
+  <section class="project-section" id="projet-actuel">
+    <div class="container">
+      <div class="project-header">
+        <h2 class="section-title reveal-up">Mon <span class="accent-border">Projet Professionnel</span></h2>
+      </div>
+      
+      <div class="project-content">
+        <div class="project-info reveal-left">
+          <span class="project-subtitle">Projet d'alternance chez MTB111</span>
+          <h3 class="project-title">Application de gestion des congés</h3>
+          
+          <p>Dans le cadre de mon alternance chez MTB111, je développe actuellement une application dédiée à la gestion des congés pour l'entreprise. Ce projet répond à un besoin concret d'optimisation des processus RH internes.</p>
+          
+          <div class="project-features">
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div>
+                <h4>Demande de congés simplifiée</h4>
+                <p>Interface intuitive permettant aux employés de soumettre leurs demandes de congés en quelques clics.</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div>
+                <h4>Validation hiérarchique</h4>
+                <p>Système de workflow pour la validation des demandes par les responsables.</p>
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div>
+                <h4>Tableau de bord RH</h4>
+                <p>Vue d'ensemble des congés de l'entreprise pour faciliter la planification des ressources.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="project-tech">
+            <span class="tech-badge">Java</span>
+            <span class="tech-badge">Spring Boot</span>
+            <span class="tech-badge">MySQL</span>
+            <span class="tech-badge">HTML/CSS</span>
+            <span class="tech-badge">JavaScript</span>
+          </div>
+        </div>
+        
+        <div class="project-image reveal-right">
+          <img src="https://via.placeholder.com/500x300" alt="Application de gestion des congés">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Section Parcours -->
+  <section class="journey-section">
+    <div class="container">
+      <div class="journey-header">
+        <h2 class="section-title reveal-up">Mon <span class="accent-border">Parcours</span></h2>
+      </div>
+      
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <span class="timeline-date">2024 - Présent</span>
+            <h3 class="timeline-title">BTS SIO SLAM en alternance</h3>
+            <p class="timeline-text">Formation en alternance du BTS Services Informatiques aux Organisations option Solutions Logicielles et Applications Métiers. Développement de compétences techniques en programmation, base de données et conception logicielle.</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <span class="timeline-date">2024 - Présent</span>
+            <h3 class="timeline-title">Alternance chez MTB111</h3>
+            <p class="timeline-text">Mise en pratique des connaissances acquises en formation dans un environnement professionnel. Développement d'une application de gestion des congés pour optimiser les processus RH de l'entreprise.</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <span class="timeline-date">2022 - 2024</span>
+            <h3 class="timeline-title">Bac STI2D</h3>
+            <p class="timeline-text">Baccalauréat Sciences et Technologies de l'Industrie et du Développement Durable. Acquisition des bases en sciences de l'ingénieur et en technologies numériques, préparation aux études supérieures en informatique.</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Call to Action -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content reveal-up">
+        <h2 class="cta-title">Intéressé par mes <span class="text-gradient">compétences</span> ?</h2>
+        <p class="cta-text">En tant qu'étudiant en BTS SIO SLAM et alternant chez MTB111, je suis toujours à la recherche de nouvelles opportunités d'apprentissage et de collaboration. N'hésitez pas à me contacter pour discuter de vos projets ou pour en savoir plus sur mon parcours.</p>
+        <a href="contact.html" class="cta-btn">
+          Me contacter
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-info">
+        <a href="index.html" class="footer-logo">Virgile<span>.</span>Allix</a>
+        <p class="footer-text">Étudiant en BTS SIO SLAM et développeur en alternance, passionné par la création d'applications et de solutions informatiques innovantes.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="social-link" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-link" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-links">
+        <div class="footer-column">
+          <h3>Navigation</h3>
+          <nav class="footer-nav">
+            <a href="index.html">Accueil</a>
+            <a href="projet.html">Projets</a>
+            <a href="about.html">À Propos</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Compétences</h3>
+          <nav class="footer-nav">
+            <a href="#">Développement Web</a>
+            <a href="#">Développement Java</a>
+            <a href="#">UI/UX Design</a>
+            <a href="#">Bases de données</a>
+            <a href="#">Gestion de projet</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="copyright">
+        &copy; 2025 Virgile Allix. Tous droits réservés.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Chargement
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+      }, 2000);
+    });
+    
+    // Navigation
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+    
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      menuToggle.innerHTML = nav.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Effet de scroll pour l'en-tête
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Animations de révélation
+    function revealElements() {
+      const elements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+      
+      elements.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          element.classList.add('active');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', revealElements);
+    window.addEventListener('load', revealElements);
+    
+    // Mode clair/sombre
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      document.getElementById('header').classList.toggle('header-light');
+      
+      if (document.body.classList.contains('light-mode')) {
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    });
+  </script>
+</body>
+</html>
