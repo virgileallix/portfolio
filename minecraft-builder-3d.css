@@ -1,0 +1,329 @@
+/* Styles pour le Minecraft Builder 3D */
+.minecraft-builder-3d {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background-color: #1E2128;
+    border: 4px solid #3C8527;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(82, 165, 53, 0.5);
+    border-radius: 6px;
+    z-index: 10000;
+    padding: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.5, 0, 0.15, 1);
+    width: 80vw;
+    height: 80vh;
+    max-width: 1200px;
+    max-height: 800px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Minecraft', 'Outfit', sans-serif;
+  }
+  
+  .minecraft-builder-3d.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Header du builder */
+  .mc-builder-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-bottom: 2px solid #52A535;
+    margin: -10px -10px 10px -10px;
+  }
+  
+  .mc-builder-title {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #52A535;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+  }
+  
+  .mc-builder-close-btn {
+    width: 30px;
+    height: 30px;
+    background-color: #8B5D3A;
+    border: 2px solid #52A535;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  
+  .mc-builder-close-btn:hover {
+    background-color: #D95B5B;
+    transform: scale(1.1);
+  }
+  
+  .mc-builder-save-btn,
+  .mc-builder-load-btn,
+  .mc-builder-clear-btn {
+    padding: 5px 10px;
+    background-color: #4d7c32;
+    border: 2px solid #374d27;
+    border-bottom: 4px solid #374d27;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.1s;
+    margin-right: 10px;
+    font-family: 'Minecraft', 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+  }
+  
+  .mc-builder-save-btn:hover,
+  .mc-builder-load-btn:hover {
+    background-color: #52A535;
+  }
+  
+  .mc-builder-clear-btn {
+    background-color: #a34732;
+    border: 2px solid #8B3E2D;
+    border-bottom: 4px solid #8B3E2D;
+  }
+  
+  .mc-builder-clear-btn:hover {
+    background-color: #D95B5B;
+  }
+  
+  .mc-builder-save-btn:active,
+  .mc-builder-load-btn:active,
+  .mc-builder-clear-btn:active {
+    transform: translateY(2px);
+    border-bottom-width: 2px;
+    margin-bottom: 2px;
+  }
+  
+  /* Container du canvas Three.js */
+  .mc-builder-canvas-container {
+    flex: 1;
+    overflow: hidden;
+    background-color: #87CEEB;
+    border: 3px solid #1a1a1a;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+  }
+  
+  .mc-builder-canvas-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+  
+  /* Palette de blocs */
+  .mc-builder-palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 2px solid #52A535;
+    border-radius: 4px;
+    margin-top: 10px;
+    overflow-x: auto;
+    max-height: 120px;
+  }
+  
+  .mc-builder-palette-block {
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    background-size: cover;
+    border: 2px solid #1a1a1a;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .mc-builder-palette-block:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .mc-builder-palette-block.active {
+    border-color: #52A535;
+    box-shadow: 0 0 10px rgba(82, 165, 53, 0.7);
+    transform: scale(1.1);
+  }
+  
+  .mc-builder-delete-block {
+    background-color: #D95B5B;
+    color: white;
+    font-size: 1.2rem;
+  }
+  
+  .block-name {
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
+  
+  .mc-builder-palette-block:hover .block-name {
+    opacity: 1;
+  }
+  
+  /* Message de notification */
+  .mc-builder-message {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(82, 165, 53, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    animation: messageAnim 2s forwards;
+    z-index: 10001;
+    border: 2px solid #374d27;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+  }
+  
+  @keyframes messageAnim {
+    0% { transform: translate(-50%, 10px); opacity: 0; }
+    10% { transform: translate(-50%, 0); opacity: 1; }
+    80% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, -10px); opacity: 0; }
+  }
+  
+  /* Adaptation pour mobile */
+  @media (max-width: 768px) {
+    .minecraft-builder-3d {
+      width: 95vw;
+      height: 95vh;
+    }
+    
+    .mc-builder-header {
+      flex-wrap: wrap;
+    }
+    
+    .mc-builder-palette-block {
+      width: 30px;
+      height: 30px;
+    }
+    
+    .mc-builder-save-btn,
+    .mc-builder-load-btn,
+    .mc-builder-clear-btn {
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      margin-right: 5px;
+    }
+    
+    .block-name {
+      display: none;
+    }
+  }
+  
+  /* Animation style Minecraft pour l'apparition du builder */
+  @keyframes minecraftAppear {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    80% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  }
+  
+  /* Lien vers le builder dans le footer */
+  .builder-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: rgba(82, 165, 53, 0.2);
+    border: 2px solid var(--primary-dark);
+    border-radius: 4px;
+    transition: all 0.3s;
+    color: var(--primary);
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  
+  .builder-link:hover {
+    background-color: rgba(82, 165, 53, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(82, 165, 53, 0.3);
+  }
+  
+  .builder-link i {
+    margin-right: 5px;
+  }
+  
+  /* Style pour l'indice sur la page d'accueil */
+  .minecraft-hint {
+    font-family: 'Minecraft', 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin-top: 20px;
+    transition: opacity 0.3s;
+    text-align: center;
+    color: var(--primary-light);
+    letter-spacing: 1px;
+  }
+  
+  .minecraft-hint:hover {
+    opacity: 1;
+  }
+  
+  /* Effets 3D pour les blocs */
+  .mc-builder-palette-block {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .mc-builder-palette-block::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.3) 0%, 
+      rgba(255, 255, 255, 0) 50%, 
+      rgba(0, 0, 0, 0.3) 100%);
+    pointer-events: none;
+  }
+  
+  .mc-builder-palette-block:active::after {
+    background: linear-gradient(135deg, 
+      rgba(0, 0, 0, 0.3) 0%, 
+      rgba(0, 0, 0, 0) 50%, 
+      rgba(255, 255, 255, 0.2) 100%);
+  }
+  
+  /* Curseur personnalisé */
+  .minecraft-builder-3d .mc-builder-canvas-container {
+    cursor: url('data:image/png;base64,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'), auto;
+  }
+  
+  .minecraft-builder-3d .mc-builder-canvas-container.delete-mode {
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAhGVYSWZNTQAqAAAACAAGAQYAAwAAAAEAAgAAARIAAwAAAAEAAQAAARoABQAAAAEAAABWARsABQAAAAEAAABeASgAAwAAAAEAAgAAh2kABAAAAAEAAABmAAAAAAAAAEgAAAABAAAASAAAAAEAAqACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAAAQdIdCAAAACXBIWXMAAAsTAAALEwEAmpwYAAACZmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICAgICA8dGlmZjpSZXNvbHV0aW9uVW5pdD4yPC90aWZmOlJlc29sdXRpb25Vbml0PgogICAgICAgICA8ZXhpZjpDb2xvclNwYWNlPjE8L2V4aWY6Q29sb3JTcGFjZT4KICAgICAgICAgPGV4aWY6UGl4ZWxYRGltZW5zaW9uPjY0PC9leGlmOlBpeGVsWERpbWVuc2lvbj4KICAgICAgICAgPGV4aWY6UGl4ZWxZRGltZW5zaW9uPjY0PC9leGlmOlBpeGVsWURpbWVuc2lvbj4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cjw2wtwAAAP/SURBVFgJxVfNTxNBFH9vZrct3a3QllJAKCBfGkCJMTERvXjwajz5J3jxH/Dk0YsnE2M8mXj0pCfvGk0kElA+xFIKpa1AWwr0Y5eWttvdefabpdtt6ZQ2RDe0uzPvzfv93ps376MkjDEcMwT+02iATXqaNlP5aUzxjjKEAaxu3lTOiMQvYwyAMp3r7vQP9vX4+7ruXOPCmYZpQXTn4OXqm5lHtcZIxJfEJJiQGCN0WzARvAUk74x2X398/9bDO7cGQrwCxf5B4yiKD+bW3n6Lrj9YfPPyWQNwWN7yFzj0WuBF9dOdewNhuVnc2qFm1BnbLB6CIQgwr/qQazqM7O6F8P4N4/MXi6Wtw/Cj5/OrO1lT+HJiYyS3l17H6h0OJwYZUVWoCWNohg6yG0K5MgKe4gCyFUAowwb7e5/Gk6nE46ezdwXVsqX18y2Zjl9z7CrXYIpQNqmfbLtsDvj6pK50LDEJK91UjrKt6LjXuzmeTKfHn75eXCh4XGcmr1UB/4mkw6ZJRuTaGaRoBAq5PNSPVCgZB8DxrG5QnMRKRY6wVLRTOW1o4/FUxjxw1iDnCMaICmDx+pxOkD1etIhcMDxf17B7g2XSybiP3M3pVk8Wa3qLqBnXVUmb28mlxbSWRyJGUhC1/hBUm6BMFDDl3nR05+MgKgoEgl3xh6OXwldfPVubx95N5JbpK/TYDBk2gUJO0Gpy3xgG2VNCF0pQqZTg7ezcF1mSJn+WKzeRNBCj3eVHzSSgrKRY67OUvCQj1LFo1LF+VazD0nA3+kNZ6fWvbUXPZ9PZ+7IkzmEaIWb0LIqAH7l1wBFCMV3QqKbRQR0V/QRyxlowqCN4e8vnC0c2o+mBXGb/jizL31F2PEDq2iajRgUaAY7X4SrKpIRUcbHDXTBRGCnr2FhIknrxA89HtmNprHoLyI5HCvB5FNhCjR2fajZBIkIMdDBOtLYEEAAK4HJ1bCjKWnR7NzWuarpTBawJaRUJiNzjphFzRf4yQSu7RkZj2Ib+X/V6wYs7YQkVL259FsrlYbVSPYtyZmDDogI4PJebayfYr7pCdbnlLgvTWyIBiJQwMDKcnLzcg5p9puu6G9mwxZcGdZLATx5HW/JmEzGjQFtyK5BbFpF1OBwB9OW5wdDQvS6vr/QntjdOhTY4uOF0Om/hKx43/CQcZwQtmY87xnZqwxE4bLMJFBXm3aSF/jhMOExG0hE0gmyiAIwHFzm2LFgyQkp7sHvHBs0PYkQAfV5AXQKBGD0A/z5QZQRULZcMOCK/VQ5mVU4maTnA35WnACxOGQQ4ZYZ6ADTmbzqw07DrjG6OWdcBJJqEm0lXQDOm1fkv3S1XbhvYRRcAAAAASUVORK5CYII='), auto;
+  }
