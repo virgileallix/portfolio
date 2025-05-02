@@ -190,7 +190,7 @@ class Minecraft3DBuilder {
         this.keySequence = [];
         this.inventory = [];
         this.hotbarSize = 9;
-        
+
         for (let i = 0; i < this.hotbarSize; i++) {
             const blockTypes = Object.keys(this.blockTypes);
             if (i < blockTypes.length) {
@@ -265,6 +265,10 @@ class Minecraft3DBuilder {
                 this.toggleBuilder();
             }
         });
+        // Signaler que le builder est prêt pour le système de mobs
+        document.dispatchEvent(new CustomEvent('minecraft-builder-ready', {
+            detail: { builder: this }
+        }));
         window.addEventListener('wheel', (e) => this.handleMouseWheel(e));
     }
 
@@ -279,26 +283,26 @@ class Minecraft3DBuilder {
             }
             return; // Ignorer toutes les autres touches
         }
-        
+
         if (this.isActive) {
             switch (e.code) {
                 // Support des touches ZQSD (clavier français) et WASD (international)
                 // Z/W fait avancer, S fait reculer
-                case 'KeyW': 
-                case 'KeyZ': 
-                    this.moveState.forward = true; 
+                case 'KeyW':
+                case 'KeyZ':
+                    this.moveState.forward = true;
                     break;
-                case 'KeyS': 
-                    this.moveState.backward = true; 
+                case 'KeyS':
+                    this.moveState.backward = true;
                     break;
-                case 'KeyA': 
-                case 'KeyQ': 
-                    this.moveState.left = true; 
+                case 'KeyA':
+                case 'KeyQ':
+                    this.moveState.left = true;
                     break;
-                case 'KeyD': 
-                    this.moveState.right = true; 
+                case 'KeyD':
+                    this.moveState.right = true;
                     break;
-                case 'Space': 
+                case 'Space':
                     if (this.moveState.flying) {
                         this.moveState.up = true;
                     } else if (this.isGrounded && this.canJump) {
@@ -308,60 +312,60 @@ class Minecraft3DBuilder {
                         setTimeout(() => { this.canJump = true; }, 300);
                     }
                     break;
-                case 'ShiftLeft': 
+                case 'ShiftLeft':
                     if (this.moveState.flying) {
                         this.moveState.down = true;
                     } else {
                         this.moveState.sprint = true;
                     }
                     break;
-                case 'KeyE': 
-                    this.toggleInventory(); 
+                case 'KeyE':
+                    this.toggleInventory();
                     break;
-                case 'KeyF': 
-                    this.toggleFlying(); 
+                case 'KeyF':
+                    this.toggleFlying();
                     break;
-                case 'KeyC': 
-                    this.toggleCursor(); 
+                case 'KeyC':
+                    this.toggleCursor();
                     break;
-                case 'Escape': 
-                    this.toggleBuilder(); 
+                case 'Escape':
+                    this.toggleBuilder();
                     break;
-                case 'Digit1': 
-                case 'Ampersand': 
-                    this.selectHotbarSlot(0); 
+                case 'Digit1':
+                case 'Ampersand':
+                    this.selectHotbarSlot(0);
                     break;
-                case 'Digit2': 
-                case 'Eacute': 
-                    this.selectHotbarSlot(1); 
+                case 'Digit2':
+                case 'Eacute':
+                    this.selectHotbarSlot(1);
                     break;
-                case 'Digit3': 
-                case 'QuoteDbl': 
-                    this.selectHotbarSlot(2); 
+                case 'Digit3':
+                case 'QuoteDbl':
+                    this.selectHotbarSlot(2);
                     break;
-                case 'Digit4': 
-                case 'Quote': 
-                    this.selectHotbarSlot(3); 
+                case 'Digit4':
+                case 'Quote':
+                    this.selectHotbarSlot(3);
                     break;
-                case 'Digit5': 
-                case 'ParenthesisLeft': 
-                    this.selectHotbarSlot(4); 
+                case 'Digit5':
+                case 'ParenthesisLeft':
+                    this.selectHotbarSlot(4);
                     break;
-                case 'Digit6': 
-                case 'Minus': 
-                    this.selectHotbarSlot(5); 
+                case 'Digit6':
+                case 'Minus':
+                    this.selectHotbarSlot(5);
                     break;
-                case 'Digit7': 
-                case 'Egrave': 
-                    this.selectHotbarSlot(6); 
+                case 'Digit7':
+                case 'Egrave':
+                    this.selectHotbarSlot(6);
                     break;
-                case 'Digit8': 
-                case 'Underscore': 
-                    this.selectHotbarSlot(7); 
+                case 'Digit8':
+                case 'Underscore':
+                    this.selectHotbarSlot(7);
                     break;
-                case 'Digit9': 
-                case 'Ccedilla': 
-                    this.selectHotbarSlot(8); 
+                case 'Digit9':
+                case 'Ccedilla':
+                    this.selectHotbarSlot(8);
                     break;
             }
         }
@@ -383,24 +387,24 @@ class Minecraft3DBuilder {
     handleKeyUp(e) {
         if (this.isActive) {
             switch (e.code) {
-                case 'KeyW': 
+                case 'KeyW':
                 case 'KeyZ':
-                    this.moveState.forward = false; 
+                    this.moveState.forward = false;
                     break;
-                case 'KeyS': 
-                    this.moveState.backward = false; 
+                case 'KeyS':
+                    this.moveState.backward = false;
                     break;
-                case 'KeyA': 
+                case 'KeyA':
                 case 'KeyQ':
-                    this.moveState.left = false; 
+                    this.moveState.left = false;
                     break;
-                case 'KeyD': 
-                    this.moveState.right = false; 
+                case 'KeyD':
+                    this.moveState.right = false;
                     break;
-                case 'Space': 
-                    this.moveState.up = false; 
+                case 'Space':
+                    this.moveState.up = false;
                     break;
-                case 'ShiftLeft': 
+                case 'ShiftLeft':
                     this.moveState.down = false;
                     this.moveState.sprint = false;
                     break;
@@ -450,11 +454,11 @@ class Minecraft3DBuilder {
             this.velocity.y = 0;
         }
         this.playSound('click');
-        
+
         // Afficher un message temporaire
         this.showMessage(this.moveState.flying ? "Mode vol activé" : "Mode vol désactivé");
     }
-    
+
     // Nouvelle méthode pour activer/désactiver le curseur
     toggleCursor() {
         if (document.pointerLockElement === this.container.querySelector('.mc-builder-canvas-container')) {
@@ -870,13 +874,13 @@ class Minecraft3DBuilder {
             hint.className = 'mc-building-hint';
             hint.innerHTML = 'ZQSD/WASD: Se déplacer | Espace: Sauter/Voler | E: Inventaire | F: Activer/Désactiver Vol | C: Libérer/Verrouiller Curseur | Échap: Quitter<br>Molette: Changer de bloc | Clic Gauche: Casser | Clic Droit: Placer';
             this.container.appendChild(hint);
-            
+
             setTimeout(() => {
                 hint.remove();
             }, 10000);
         }, 10);
     }
-    
+
     // Méthode pour afficher un message temporaire
     showMessage(text, duration = 2000) {
         // Supprimer tout message existant
@@ -884,12 +888,12 @@ class Minecraft3DBuilder {
         if (existingMessage) {
             existingMessage.remove();
         }
-        
+
         const message = document.createElement('div');
         message.className = 'mc-message';
         message.textContent = text;
         this.container.appendChild(message);
-        
+
         setTimeout(() => {
             message.remove();
         }, duration);
@@ -1014,16 +1018,16 @@ class Minecraft3DBuilder {
     createInventory() {
         const inventoryContainer = document.createElement('div');
         inventoryContainer.className = 'mc-inventory-container';
-        
+
         // Ajouter un titre à l'inventaire
         const inventoryTitle = document.createElement('div');
         inventoryTitle.className = 'mc-inventory-title';
         inventoryTitle.textContent = 'Inventaire';
         inventoryContainer.appendChild(inventoryTitle);
-        
+
         const inventoryGrid = document.createElement('div');
         inventoryGrid.className = 'mc-inventory-grid';
-        
+
         // Organiser les blocs par catégories pour plus de clarté
         const categories = {
             'Naturel': ['grass', 'dirt', 'stone', 'sand', 'gravel', 'oak_log', 'oak_leaves'],
@@ -1031,35 +1035,35 @@ class Minecraft3DBuilder {
             'Précieux': ['diamond_ore', 'diamond_block', 'iron_ore', 'iron_block', 'gold_ore', 'gold_block', 'obsidian'],
             'Spécial': ['water', 'lava', 'glowstone', 'tnt', 'bedrock']
         };
-        
+
         // Créer des en-têtes de catégorie
         Object.entries(categories).forEach(([category, blocks], categoryIndex) => {
             const categoryHeader = document.createElement('div');
             categoryHeader.className = 'mc-inventory-category';
             categoryHeader.textContent = category;
             categoryHeader.style.gridColumn = '1 / span 9';
-            
+
             inventoryGrid.appendChild(categoryHeader);
-            
+
             // Ajouter les blocs de cette catégorie
             blocks.forEach(blockType => {
                 const slot = document.createElement('div');
                 slot.className = 'mc-inventory-slot';
-                
+
                 const blockData = this.blockTypes[blockType];
-                
+
                 // Ajouter l'image du bloc
                 const img = document.createElement('img');
                 img.src = blockData.textures.all || blockData.textures.side || blockData.textures.top;
                 img.alt = blockData.name;
                 slot.appendChild(img);
-                
+
                 // Ajouter le nom du bloc
                 const blockName = document.createElement('div');
                 blockName.className = 'mc-inventory-block-name';
                 blockName.textContent = blockData.name;
                 slot.appendChild(blockName);
-                
+
                 slot.addEventListener('click', () => {
                     this.inventory[this.selectedSlot] = blockType;
                     this.selectedBlock = blockType;
@@ -1068,19 +1072,19 @@ class Minecraft3DBuilder {
                     this.toggleInventory(); // Fermer l'inventaire après sélection
                     this.playSound('click');
                 });
-                
+
                 inventoryGrid.appendChild(slot);
             });
         });
-        
+
         inventoryContainer.appendChild(inventoryGrid);
-        
+
         // Ajouter un bouton pour fermer l'inventaire
         const closeButton = document.createElement('button');
         closeButton.className = 'mc-inventory-close';
         closeButton.textContent = 'Fermer (E)';
         closeButton.addEventListener('click', () => this.toggleInventory());
-        
+
         inventoryContainer.appendChild(closeButton);
         this.container.appendChild(inventoryContainer);
     }
@@ -1102,11 +1106,11 @@ class Minecraft3DBuilder {
             }
         }, 100);
     }
-    
+
     createControlsInfo() {
         const controlsInfo = document.createElement('div');
         controlsInfo.className = 'mc-controls-info';
-        controlsInfo.innerHTML = 
+        controlsInfo.innerHTML =
             'Contrôles:<br>' +
             'ZQSD/WASD: Déplacement<br>' +
             '→ Z/W: Avancer, S: Reculer<br>' +
@@ -1116,14 +1120,14 @@ class Minecraft3DBuilder {
             'C: Libérer Curseur<br>' +
             'E: Inventaire<br>' +
             'Échap: Quitter';
-        
+
         this.container.appendChild(controlsInfo);
-        
+
         // Faire disparaître après 15 secondes
         setTimeout(() => {
             controlsInfo.style.opacity = '0';
             controlsInfo.style.transition = 'opacity 1s';
-            
+
             setTimeout(() => {
                 controlsInfo.remove();
             }, 1000);
@@ -1410,12 +1414,12 @@ class Minecraft3DBuilder {
 
     setupMinecraftControls() {
         const canvasContainer = this.container.querySelector('.mc-builder-canvas-container');
-        
+
         // Configurer le verrouillage du pointeur pour FPS style
         canvasContainer.addEventListener('click', () => {
             this.lockPointer();
         });
-        
+
         // Gestion des événements de verrouillage du pointeur
         document.addEventListener('pointerlockchange', this.handlePointerLockChange.bind(this));
         document.addEventListener('mozpointerlockchange', this.handlePointerLockChange.bind(this));
@@ -1471,7 +1475,7 @@ class Minecraft3DBuilder {
         if (inventory && inventory.classList.contains('active')) {
             return; // Ne rien faire si l'inventaire est ouvert
         }
-        
+
         // 0: Clic gauche (casser), 2: Clic droit (placer)
         if (e.button === 0) {
             this.mouseState.leftDown = true;
@@ -1498,24 +1502,24 @@ class Minecraft3DBuilder {
         if (this.mouseState.breakingInterval) {
             clearInterval(this.mouseState.breakingInterval);
         }
-        
+
         // Vérifier si l'inventaire est ouvert - ne pas casser de bloc
         const inventory = document.querySelector('.mc-inventory-container');
         if (inventory && inventory.classList.contains('active')) {
             return; // Ne rien faire si l'inventaire est ouvert
         }
-        
+
         const intersectedBlock = this.getTargetedBlock();
         if (!intersectedBlock) return;
-        
+
         const { position, blockInfo } = intersectedBlock;
-        
+
         // Si c'est de la bedrock, on ne peut pas casser
         if (blockInfo.type === 'bedrock') {
             this.playSound('click');
             return;
         }
-        
+
         this.mouseState.breakingBlock = true;
         this.mouseState.breakingProgress = 0;
         this.mouseState.breakingPosition = {
@@ -1523,14 +1527,14 @@ class Minecraft3DBuilder {
             y: position.y,
             z: position.z
         };
-        
+
         // Créer un overlay pour montrer la progression du cassage
         this.createBreakingOverlay(position);
-        
+
         // En mode créatif, on casse plus vite (5 ticks = 250ms)
         const breakSpeed = 30; // Accéléré à 30ms par tick
         const creativeBreakTime = 200; // Temps total réduit à 200ms
-        
+
         this.mouseState.breakingInterval = setInterval(() => {
             // Vérifier si l'inventaire a été ouvert entre temps
             const inventory = document.querySelector('.mc-inventory-container');
@@ -1538,12 +1542,12 @@ class Minecraft3DBuilder {
                 this.stopBreakingBlock();
                 return;
             }
-            
+
             if (!this.mouseState.leftDown || !this.mouseState.breakingBlock) {
                 this.stopBreakingBlock();
                 return;
             }
-            
+
             // Vérifier que le joueur regarde toujours le même bloc
             const currentTarget = this.getTargetedBlock();
             if (!currentTarget) {
@@ -1558,11 +1562,11 @@ class Minecraft3DBuilder {
                 this.stopBreakingBlock();
                 return;
             }
-            
+
             this.mouseState.breakingProgress += breakSpeed;
             const stageIndex = Math.min(9, Math.floor(this.mouseState.breakingProgress / (creativeBreakTime / 10)));
             this.updateBreakingOverlay(stageIndex);
-            
+
             if (this.mouseState.breakingProgress >= creativeBreakTime) {
                 // Vérifier que le bloc existe toujours avant de le supprimer
                 const blockKey = `${this.mouseState.breakingPosition.x},${this.mouseState.breakingPosition.y},${this.mouseState.breakingPosition.z}`;
@@ -1574,12 +1578,12 @@ class Minecraft3DBuilder {
             }
         }, breakSpeed);
     }
-    
+
     // Nouvelles méthodes pour les overlays de cassage de blocs
     createBreakingOverlay(position) {
         // Supprimer l'ancien overlay s'il existe
         this.removeBreakingOverlay();
-        
+
         // Créer un nouveau mesh pour l'overlay de cassage
         const breakingGeometry = this.blockGeometry.clone();
         const breakingMaterial = new THREE.MeshBasicMaterial({
@@ -1588,22 +1592,22 @@ class Minecraft3DBuilder {
             opacity: 0.8,
             depthWrite: false
         });
-        
+
         const breakingMesh = new THREE.Mesh(breakingGeometry, breakingMaterial);
         breakingMesh.position.set(position.x, position.y, position.z);
         breakingMesh.name = 'breakingOverlay';
-        
+
         this.scene.add(breakingMesh);
         this.mouseState.breakingMesh = breakingMesh;
     }
-    
+
     updateBreakingOverlay(stage) {
         if (this.mouseState.breakingMesh) {
             this.mouseState.breakingMesh.material.map = this.breakingTextures[stage];
             this.mouseState.breakingMesh.material.needsUpdate = true;
         }
     }
-    
+
     removeBreakingOverlay() {
         if (this.mouseState.breakingMesh) {
             this.scene.remove(this.mouseState.breakingMesh);
@@ -1625,11 +1629,11 @@ class Minecraft3DBuilder {
             clearInterval(this.mouseState.breakingInterval);
             this.mouseState.breakingInterval = null;
         }
-        
+
         this.mouseState.breakingBlock = false;
         this.mouseState.breakingProgress = 0;
         this.mouseState.breakingPosition = null;
-        
+
         // Supprimer l'overlay de cassage
         this.removeBreakingOverlay();
     }
@@ -1640,7 +1644,7 @@ class Minecraft3DBuilder {
         if (inventory && inventory.classList.contains('active')) {
             return; // Ne rien faire si l'inventaire est ouvert
         }
-        
+
         if (!this.selectedBlock) return;
 
         // Obtient le bloc ciblé
@@ -2101,7 +2105,7 @@ class Minecraft3DBuilder {
         // Vérifier si l'inventaire est ouvert - ne pas appliquer les mouvements
         const inventory = document.querySelector('.mc-inventory-container');
         const isInventoryOpen = inventory && inventory.classList.contains('active');
-        
+
         // Mettre à jour la physique seulement si l'inventaire est fermé
         if (!isInventoryOpen) {
             this.applyPhysics();
@@ -2113,10 +2117,10 @@ class Minecraft3DBuilder {
         // Ne traiter les mouvements que si l'inventaire est fermé
         if (!isInventoryOpen) {
             if (this.moveState.forward) {
-                moveVector.z -= 1; // Z/W = AVANT
+                moveVector.z += 1; // Z/W = AVANT
             }
             if (this.moveState.backward) {
-                moveVector.z += 1; // S = ARRIÈRE
+                moveVector.z -= 1; // S = ARRIÈRE
             }
             if (this.moveState.left) {
                 moveVector.x -= 1;
@@ -2294,7 +2298,6 @@ class Minecraft3DBuilder {
 document.addEventListener('DOMContentLoaded', function () {
     window.minecraft3DBuilder = new Minecraft3DBuilder();
 
-    // Désactive le menu contextuel pour permettre le clic droit dans le jeu
     document.addEventListener('contextmenu', function (e) {
         if (window.minecraft3DBuilder.isActive) {
             e.preventDefault();
