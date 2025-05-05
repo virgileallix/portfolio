@@ -938,62 +938,61 @@ function setupMusicDiscs() {
   const jukeboxPanel = document.createElement('div');
   jukeboxPanel.className = 'jukebox-panel';
   
-  // Définition des disques de musique avec liens vers Internet Archive
-  // Ces liens sont beaucoup plus fiables pour la lecture audio
+  // Définition des disques de musique avec ID YouTube des pistes officielles de Minecraft
   const musicDiscs = [
     {
       id: 'disc_cat',
       name: 'Cat',
       image: 'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.19.3/assets/minecraft/textures/item/music_disc_cat.png',
-      audio: 'https://archive.org/download/MinecraftVolume/11%20-%20Cat.mp3'
+      youtubeId: 'QhPHB6ovnKE' // C418 - Cat (ID YouTube officiel)
     },
     {
       id: 'disc_13',
       name: '13',
       image: 'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.19.3/assets/minecraft/textures/item/music_disc_13.png',
-      audio: 'https://archive.org/download/MinecraftVolume/12%20-%2013.mp3'
+      youtubeId: 'd_2RCfByABg' // C418 - 13
     },
     {
       id: 'disc_blocks',
       name: 'Blocks',
       image: 'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.19.3/assets/minecraft/textures/item/music_disc_blocks.png',
-      audio: 'https://archive.org/download/C418-minecraft-volume-beta/03%20-%20Blocks.mp3'
+      youtubeId: 'aLf9lfbI5Kg' // C418 - Blocks
     },
     {
       id: 'disc_chirp',
       name: 'Chirp',
       image: 'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.19.3/assets/minecraft/textures/item/music_disc_chirp.png',
-      audio: 'https://archive.org/download/C418-minecraft-volume-beta/08%20-%20Chirp.mp3'
+      youtubeId: 'wVn4v_gEtAc' // C418 - Chirp
     },
     {
       id: 'disc_far',
       name: 'Far',
       image: 'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.19.3/assets/minecraft/textures/item/music_disc_far.png',
-      audio: 'https://archive.org/download/C418-minecraft-volume-beta/13%20-%20Far.mp3'
+      youtubeId: 'LN9W-tVQ8B8' // C418 - Far
     },
     {
       id: 'disc_mall',
       name: 'Mall',
       image: 'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.19.3/assets/minecraft/textures/item/music_disc_mall.png',
-      audio: 'https://archive.org/download/C418-minecraft-volume-beta/17%20-%20Mall.mp3'
+      youtubeId: 'wnHy42Zh14Y' // C418 - Mall
     },
     {
       id: 'disc_mellohi',
       name: 'Mellohi',
       image: 'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.19.3/assets/minecraft/textures/item/music_disc_mellohi.png',
-      audio: 'https://archive.org/download/C418-minecraft-volume-beta/19%20-%20Mellohi.mp3'
+      youtubeId: 'qBt-MRe9MRs' // C418 - Mellohi
     },
     {
       id: 'disc_stal',
       name: 'Stal',
       image: 'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.19.3/assets/minecraft/textures/item/music_disc_stal.png',
-      audio: 'https://archive.org/download/MinecraftVolume/20%20-%20Stal.mp3'
+      youtubeId: 'YVklR_Yd64M' // C418 - Stal
     },
     {
       id: 'disc_wait',
       name: 'Wait',
       image: 'https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.19.3/assets/minecraft/textures/item/music_disc_wait.png',
-      audio: 'https://archive.org/download/MinecraftVolume/21%20-%20Wait.mp3'
+      youtubeId: 'FDiVAOjZQiE' // C418 - Wait
     }
   ];
   
@@ -1009,7 +1008,7 @@ function setupMusicDiscs() {
   musicDiscs.forEach(disc => {
     jukeboxContent += `
       <div class="music-disc-container">
-        <div class="music-disc" data-disc="${disc.id}" data-audio="${disc.audio}" style="background-image: url('${disc.image}')"></div>
+        <div class="music-disc" data-disc="${disc.id}" data-youtube-id="${disc.youtubeId}" style="background-image: url('${disc.image}')"></div>
         <div class="disc-label">${disc.name}</div>
       </div>
     `;
@@ -1018,16 +1017,100 @@ function setupMusicDiscs() {
   jukeboxContent += `
     </div>
     <div id="music-status">Aucun disque en lecture</div>
-    <audio id="jukebox-player" style="display: none;" crossorigin="anonymous"></audio>
+    <div id="youtube-container" style="position: absolute; opacity: 0; pointer-events: none;"></div>
   `;
   
   jukeboxPanel.innerHTML = jukeboxContent;
   document.body.appendChild(jukeboxPanel);
   
-  // Variables pour la lecture audio
-  const audioPlayer = document.getElementById('jukebox-player');
+  // Variables pour YouTube
+  let ytPlayer = null;
   let currentDisc = null;
   const musicStatus = document.getElementById('music-status');
+  
+  // Fonction pour charger l'API YouTube
+  function loadYouTubeAPI() {
+    if (window.YT) return Promise.resolve();
+    
+    return new Promise((resolve, reject) => {
+      window.onYouTubeIframeAPIReady = function() {
+        resolve();
+      };
+      
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      
+      setTimeout(() => {
+        if (!window.YT) {
+          reject("Impossible de charger l'API YouTube");
+        }
+      }, 5000);
+    });
+  }
+  
+  // Fonction pour créer le lecteur YouTube
+  function initYouTubePlayer() {
+    if (ytPlayer) {
+      ytPlayer.destroy();
+    }
+    
+    ytPlayer = new YT.Player('youtube-container', {
+      height: '0',
+      width: '0',
+      playerVars: {
+        'autoplay': 0,
+        'controls': 0,
+        'disablekb': 1,
+        'iv_load_policy': 3,
+        'modestbranding': 1,
+        'showinfo': 0,
+        'rel': 0
+      },
+      events: {
+        'onStateChange': onPlayerStateChange
+      }
+    });
+    
+    return ytPlayer;
+  }
+  
+  // Gestion des changements d'état du lecteur
+  function onPlayerStateChange(event) {
+    // Si la vidéo est terminée (0 = terminée)
+    if (event.data === YT.PlayerState.ENDED) {
+      // Arrêter l'animation du disque
+      document.querySelectorAll('.music-disc.playing').forEach(playingDisc => {
+        playingDisc.classList.remove('playing');
+      });
+      currentDisc = null;
+      musicStatus.textContent = "Lecture terminée";
+    }
+    
+    // Si la vidéo est en lecture (1 = en lecture)
+    if (event.data === YT.PlayerState.PLAYING) {
+      musicStatus.textContent = "En lecture: " + currentDisc.parentElement.querySelector('.disc-label').textContent;
+      
+      // Mettre à jour le progrès (si ce n'est pas déjà fait)
+      updateAchievementProgress('music_collector', 1);
+      
+      // Afficher un message dans le chat
+      showMinecraftChat([
+        { type: 'system', text: `Lecture du disque ${currentDisc.parentElement.querySelector('.disc-label').textContent}...` }
+      ]);
+    }
+    
+    // Si la vidéo est en pause (2 = pause)
+    if (event.data === YT.PlayerState.PAUSED) {
+      musicStatus.textContent = "Pause: " + currentDisc.parentElement.querySelector('.disc-label').textContent;
+    }
+    
+    // Si la vidéo est en attente (3 = mise en mémoire tampon)
+    if (event.data === YT.PlayerState.BUFFERING) {
+      musicStatus.textContent = "Chargement...";
+    }
+  }
   
   // Ouvrir/fermer le panneau
   jukebox.addEventListener('click', () => {
@@ -1044,152 +1127,112 @@ function setupMusicDiscs() {
     jukeboxPanel.classList.remove('active');
     
     // Si un disque est en lecture, l'arrêter
-    if (audioPlayer && !audioPlayer.paused) {
-      audioPlayer.pause();
-      document.querySelectorAll('.music-disc.playing').forEach(disc => {
-        disc.classList.remove('playing');
-      });
-      currentDisc = null;
-      musicStatus.textContent = "Lecture arrêtée";
+    if (ytPlayer && ytPlayer.getPlayerState && ytPlayer.getPlayerState() === YT.PlayerState.PLAYING) {
+      ytPlayer.pauseVideo();
     }
   });
   
   // Gérer les disques de musique
   document.querySelectorAll('.music-disc').forEach(disc => {
     disc.addEventListener('click', () => {
-      const audioUrl = disc.getAttribute('data-audio');
+      const youtubeId = disc.getAttribute('data-youtube-id');
       const discName = disc.parentElement.querySelector('.disc-label').textContent;
       
-      // Si c'est déjà le disque en cours de lecture
-      if (currentDisc === disc) {
-        if (audioPlayer.paused) {
-          // Reprendre la lecture
-          audioPlayer.play()
-            .then(() => {
-              disc.classList.add('playing');
-              musicStatus.textContent = "En lecture: " + discName;
-            })
-            .catch(err => {
-              console.error("Erreur lors de la reprise:", err);
-              musicStatus.textContent = "Erreur de lecture";
-              simulatePlayback(disc, discName);
-            });
-        } else {
-          // Mettre en pause
-          audioPlayer.pause();
-          disc.classList.remove('playing');
-          musicStatus.textContent = "Pause: " + discName;
-        }
-        return;
-      }
-      
-      // Arrêter tous les disques en cours de lecture
-      document.querySelectorAll('.music-disc.playing').forEach(playingDisc => {
-        playingDisc.classList.remove('playing');
-      });
-      
-      // Marquer comme le nouveau disque en cours
-      currentDisc = disc;
-      
-      // Afficher un statut de chargement
-      musicStatus.textContent = "Chargement...";
-      
-      // Fonction de simulation en cas d'échec
-      function simulatePlayback(disc, discName) {
-        console.log("Passage en mode simulé pour le disque:", discName);
-        disc.classList.add('playing');
-        musicStatus.textContent = "En lecture (simulée): " + discName;
+      // Si l'API YouTube n'est pas encore chargée
+      if (!window.YT) {
+        musicStatus.textContent = "Chargement de YouTube...";
         
-        // Mettre à jour le progrès quand même
-        updateAchievementProgress('music_collector', 1);
-        
-        // Afficher un message dans le chat
-        showMinecraftChat([
-          { type: 'system', text: `Lecture du disque ${discName}...` }
-        ]);
-        
-        // Simuler la fin de lecture après 30 secondes
-        setTimeout(() => {
-          if (currentDisc === disc) {
-            disc.classList.remove('playing');
-            currentDisc = null;
-            musicStatus.textContent = "Lecture terminée";
-          }
-        }, 30000);
-      }
-      
-      // Configurer les événements audio
-      audioPlayer.oncanplaythrough = function() {
-        audioPlayer.oncanplaythrough = null; // Ne déclencher qu'une fois
-      };
-      
-      audioPlayer.onplay = function() {
-        disc.classList.add('playing');
-        musicStatus.textContent = "En lecture: " + discName;
-        
-        // Mettre à jour le progrès
-        updateAchievementProgress('music_collector', 1);
-        
-        // Afficher un message dans le chat
-        showMinecraftChat([
-          { type: 'system', text: `Lecture du disque ${discName}...` }
-        ]);
-      };
-      
-      audioPlayer.onpause = function() {
-        if (currentDisc === disc) {
-          disc.classList.remove('playing');
-          musicStatus.textContent = "Pause: " + discName;
-        }
-      };
-      
-      audioPlayer.onended = function() {
-        if (currentDisc === disc) {
-          disc.classList.remove('playing');
-          currentDisc = null;
-          musicStatus.textContent = "Lecture terminée";
-        }
-      };
-      
-      audioPlayer.onerror = function() {
-        console.error("Erreur de chargement:", audioPlayer.error);
-        simulatePlayback(disc, discName);
-      };
-      
-      // Charger et lire l'audio avec gestion des CORS
-      try {
-        audioPlayer.src = audioUrl;
-        audioPlayer.crossOrigin = "anonymous"; // Essayer de contourner les restrictions CORS
-        audioPlayer.load();
-        
-        // Forcer un timeout si le chargement prend trop de temps
-        const loadTimeout = setTimeout(() => {
-          if (audioPlayer.readyState < 3) { // HAVE_FUTURE_DATA
-            console.log("Timeout de chargement, passage en mode simulé");
-            audioPlayer.onerror();
-          }
-        }, 5000);
-        
-        audioPlayer.play()
+        loadYouTubeAPI()
           .then(() => {
-            clearTimeout(loadTimeout);
+            // Initialiser le lecteur et continuer
+            ytPlayer = initYouTubePlayer();
+            
+            // Le lecteur a besoin d'un peu de temps pour s'initialiser
+            setTimeout(() => {
+              handleDiscClick(disc, youtubeId, discName);
+            }, 1000);
           })
-          .catch(err => {
-            clearTimeout(loadTimeout);
-            console.error("Erreur de lecture:", err);
+          .catch(error => {
+            console.error("Erreur lors du chargement de YouTube:", error);
+            musicStatus.textContent = "Erreur: Impossible de charger le lecteur";
+            
+            // Mode de secours - simuler la lecture
             simulatePlayback(disc, discName);
           });
-      } catch (e) {
-        console.error("Exception lors du chargement:", e);
-        simulatePlayback(disc, discName);
-      }
-      
-      // Jouer un son de clic
-      if (typeof playSound === 'function') {
-        playSound('click');
+      } else {
+        // L'API est déjà chargée, gérer le clic directement
+        handleDiscClick(disc, youtubeId, discName);
       }
     });
   });
+  
+  // Fonction pour gérer le clic sur un disque
+  function handleDiscClick(disc, youtubeId, discName) {
+    // Si c'est déjà le disque en cours de lecture
+    if (currentDisc === disc && ytPlayer) {
+      const playerState = ytPlayer.getPlayerState ? ytPlayer.getPlayerState() : -1;
+      
+      if (playerState === YT.PlayerState.PLAYING) {
+        // Mettre en pause
+        ytPlayer.pauseVideo();
+        disc.classList.remove('playing');
+        return;
+      } else if (playerState === YT.PlayerState.PAUSED || playerState === YT.PlayerState.ENDED) {
+        // Reprendre ou rejouer
+        ytPlayer.playVideo();
+        disc.classList.add('playing');
+        return;
+      }
+    }
+    
+    // Arrêter tous les disques en cours de lecture
+    document.querySelectorAll('.music-disc.playing').forEach(playingDisc => {
+      playingDisc.classList.remove('playing');
+    });
+    
+    // Marquer comme le nouveau disque en cours
+    currentDisc = disc;
+    disc.classList.add('playing');
+    
+    // Afficher un statut de chargement
+    musicStatus.textContent = "Chargement...";
+    
+    // Jouer la vidéo YouTube
+    if (ytPlayer && ytPlayer.loadVideoById) {
+      ytPlayer.loadVideoById(youtubeId);
+    } else {
+      // Mode de secours si le lecteur YouTube n'est pas initialisé
+      simulatePlayback(disc, discName);
+    }
+    
+    // Jouer un son de clic
+    if (typeof playSound === 'function') {
+      playSound('click');
+    }
+  }
+  
+  // Fonction pour simuler la lecture en cas d'échec de YouTube
+  function simulatePlayback(disc, discName) {
+    disc.classList.add('playing');
+    musicStatus.textContent = "En lecture (simulée): " + discName;
+    
+    // Mettre à jour le progrès quand même
+    updateAchievementProgress('music_collector', 1);
+    
+    // Afficher un message dans le chat
+    showMinecraftChat([
+      { type: 'system', text: `Lecture du disque ${discName}...` }
+    ]);
+    
+    // Simuler la fin de lecture après 30 secondes
+    setTimeout(() => {
+      if (currentDisc === disc) {
+        disc.classList.remove('playing');
+        currentDisc = null;
+        musicStatus.textContent = "Lecture terminée";
+      }
+    }, 30000);
+  }
   
   // Ajouter des styles supplémentaires pour améliorer l'interface
   const jukebox_style = document.createElement('style');
@@ -1284,6 +1327,20 @@ function setupMusicDiscs() {
     }
   `;
   document.head.appendChild(jukebox_style);
+  
+  // Ajouter une police de substitution pour Minecraft
+  const fontStyle = document.createElement('style');
+  fontStyle.textContent = `
+    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+    
+    @font-face {
+      font-family: 'Minecraft';
+      src: local('VT323');
+      font-weight: normal;
+      font-style: normal;
+    }
+  `;
+  document.head.appendChild(fontStyle);
 }
 
 // Setup des événements saisonniers
