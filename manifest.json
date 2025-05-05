@@ -1,0 +1,9 @@
+{
+    "name": "Portfolio Virgile Allix",
+    "short_name": "Portfolio",
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#52A535",
+    "background_color": "#202228",
+    "description": "Portfolio de Virgile Allix, développeur"
+  }

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Virgile Allix - Développeur en alternance BTS SIO SLAM, spécialisé en Java, PHP et développement web">
-  <meta name="keywords" content="développeur, alternance, BTS SIO, SLAM, Java, PHP, développement web, portfolio, minecraft">
+  <meta name="description"
+    content="Virgile Allix - Développeur en alternance BTS SIO SLAM, spécialisé en Java, PHP et développement web">
+  <meta name="keywords"
+    content="développeur, alternance, BTS SIO, SLAM, Java, PHP, développement web, portfolio, minecraft">
   <meta name="author" content="Virgile Allix">
   <meta name="theme-color" content="#52A535">
   <title>Virgile Allix | Développeur en alternance</title>
@@ -16,9 +19,10 @@
   <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
   <link rel="stylesheet" href="minecraft-builder-3d.css">
 </head>
+
 <body>
   <a href="#hero" class="skip-to-content">Aller au contenu principal</a>
-  
+
   <!-- Écran de chargement amélioré style Minecraft -->
   <div class="loader" id="loader">
     <div class="loader-content">
@@ -30,19 +34,19 @@
     </div>
     <div class="loader-blocks"></div>
   </div>
-  
+
   <!-- Conteneur de particules -->
   <div class="particles-container" id="particles-container"></div>
-  
+
   <div class="scroll-progress" id="scroll-progress"></div>
-  
+
   <header class="header" id="header">
     <div class="container nav-container">
       <a href="index.html" class="logo ore-effect" aria-label="Accueil">
         Virgile<span>.</span>Allix
         <div id="server-heartbeat"></div>
       </a>
-      
+
       <nav class="nav" id="nav">
         <a href="index.html" class="nav-link active redstone-hover">Accueil</a>
         <a href="projets.html" class="nav-link redstone-hover">Projets</a>
@@ -50,29 +54,31 @@
         <a href="contact.html" class="nav-link redstone-hover">Contact</a>
         <a href="achievements.html" class="nav-link">Succès</a>
       </nav>
-      
+
       <div class="nav-controls">
         <div class="theme-toggle dig-effect" id="theme-toggle" aria-label="Changer de thème">
           <i class="fas fa-moon"></i>
         </div>
-        
+
         <div class="menu-toggle dig-effect" id="menu-toggle" aria-label="Menu" aria-expanded="false">
           <i class="fas fa-bars"></i>
         </div>
       </div>
     </div>
   </header>
-  
+
   <section class="hero section" id="hero">
     <div class="blur-bg blur-1"></div>
     <div class="blur-bg blur-2"></div>
-    
+
     <div class="container hero-content">
       <div class="hero-text">
         <span class="hero-subtitle enchant-effect">Étudiant & Développeur</span>
-        <h1 class="hero-title">Je <span class="minecraft-text">craft</span> des <span class="text-gradient">applications</span> innovantes</h1>
-        <p class="hero-description">Étudiant en BTS SIO SLAM et développeur en alternance chez MTB111, je combine études et pratique professionnelle pour créer des solutions informatiques efficaces.</p>
-        
+        <h1 class="hero-title">Je <span class="minecraft-text">craft</span> des <span
+            class="text-gradient">applications</span> innovantes</h1>
+        <p class="hero-description">Étudiant en BTS SIO SLAM et développeur en alternance chez MTB111, je combine études
+          et pratique professionnelle pour créer des solutions informatiques efficaces.</p>
+
         <div class="hero-buttons">
           <a href="#projects" class="btn btn-primary minecraft-btn dig-effect">
             Découvrir mes créations
@@ -80,7 +86,7 @@
           </a>
           <a href="contact.html" class="btn btn-outline minecraft-btn dig-effect">Me contacter</a>
         </div>
-        
+
         <div class="hero-stats">
           <div class="stat xp-effect">
             <span class="stat-number">18</span>
@@ -96,20 +102,21 @@
           </div>
         </div>
       </div>
-      
+
       <div class="hero-image">
-        <img data-src="https://via.placeholder.com/600x800" alt="Virgile Allix" class="hero-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=">
+        <img data-src="https://via.placeholder.com/600x800" alt="Virgile Allix" class="hero-img"
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=">
         <div class="hero-img-border"></div>
         <div class="floating-pickaxe enchant-effect"></div>
       </div>
     </div>
-    
+
     <div class="scroll-indicator" id="scroll-down">
       <span class="scroll-text">Scroll</span>
       <i class="fas fa-chevron-down scroll-icon" aria-hidden="true"></i>
     </div>
   </section>
-  
+
   <section class="section" id="projects">
     <div class="container">
       <div class="section-header mc-card netherite-effect">
@@ -120,18 +127,20 @@
           <h2 class="mc-card-title">Mes Créations</h2>
         </div>
         <div class="mc-card-content">
-          <p class="section-description">Une sélection de mes travaux en cours et réalisés qui illustrent mes compétences techniques et ma démarche de développement.</p>
-          
+          <p class="section-description">Une sélection de mes travaux en cours et réalisés qui illustrent mes
+            compétences techniques et ma démarche de développement.</p>
+
           <div class="projects-filters reveal-up">
             <button class="filter-btn active dig-effect" data-filter="all">Tous</button>
             <button class="filter-btn dig-effect" data-filter="java">Java</button>
             <button class="filter-btn dig-effect" data-filter="web">Web</button>
             <button class="filter-btn dig-effect" data-filter="minecraft">Minecraft</button>
           </div>
-          
+
           <div class="projects-grid">
             <div class="project-card enchant-effect" data-category="java">
-              <img data-src="https://via.placeholder.com/600x400" alt="Application MT-Congés" class="project-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=">
+              <img data-src="https://via.placeholder.com/600x400" alt="Application MT-Congés" class="project-image"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=">
               <div class="project-overlay">
                 <span class="project-category">Application Java</span>
                 <h3 class="project-title">MT-Congés</h3>
@@ -142,9 +151,10 @@
                 </a>
               </div>
             </div>
-            
+
             <div class="project-card enchant-effect" data-category="web">
-              <img data-src="https://via.placeholder.com/600x400" alt="Site Web Portfolio" class="project-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=">
+              <img data-src="https://via.placeholder.com/600x400" alt="Site Web Portfolio" class="project-image"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=">
               <div class="project-overlay">
                 <span class="project-category">Développement Web</span>
                 <h3 class="project-title">Portfolio Personnel</h3>
@@ -155,9 +165,10 @@
                 </a>
               </div>
             </div>
-            
+
             <div class="project-card enchant-effect" data-category="minecraft">
-              <img data-src="https://via.placeholder.com/600x400" alt="Projet Minecraft" class="project-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=">
+              <img data-src="https://via.placeholder.com/600x400" alt="Projet Minecraft" class="project-image"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=">
               <div class="project-overlay">
                 <span class="project-category">Casino virtuel en java</span>
                 <h3 class="project-title">Jeu</h3>
@@ -169,13 +180,13 @@
               </div>
             </div>
           </div>
-          
+
           <div class="view-more">
             <a href="projets.html" class="btn btn-outline minecraft-btn dig-effect">Voir tous les projets</a>
           </div>
         </div>
       </div>
-      
+
       <div class="featured-project mc-card diamond-effect">
         <div class="mc-card-header">
           <div class="mc-card-icon ore-effect">
@@ -186,20 +197,23 @@
         <div class="mc-card-content">
           <div class="featured-container">
             <div class="featured-image">
-              <img data-src="https://via.placeholder.com/800x600" alt="Application MT-Congés" class="featured-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=">
+              <img data-src="https://via.placeholder.com/800x600" alt="Application MT-Congés" class="featured-img"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=">
             </div>
-            
+
             <div class="featured-content">
               <span class="featured-badge">MT-Congés</span>
               <h3 class="featured-title">Application de gestion des congés</h3>
-              <p class="featured-desc">Dans le cadre de mon alternance chez MTB111, je développe une application Java pour la gestion des congés des employés. Cette solution permet de simplifier les demandes de congés, le processus de validation et le suivi des absences pour l'ensemble de l'entreprise.</p>
-              
+              <p class="featured-desc">Dans le cadre de mon alternance chez MTB111, je développe une application Java
+                pour la gestion des congés des employés. Cette solution permet de simplifier les demandes de congés, le
+                processus de validation et le suivi des absences pour l'ensemble de l'entreprise.</p>
+
               <div class="featured-tech">
                 <span class="tech-tag potion-effect">Java</span>
                 <span class="tech-tag potion-effect">MySQL</span>
                 <span class="tech-tag potion-effect">JavaFX</span>
               </div>
-              
+
               <div class="featured-cta">
                 <a href="projet-mtconges.html" class="btn btn-primary minecraft-btn dig-effect">Explorer le projet</a>
               </div>
@@ -209,7 +223,7 @@
       </div>
     </div>
   </section>
-  
+
   <section class="section grass-block" id="about">
     <div class="container">
       <div class="mc-card">
@@ -222,20 +236,27 @@
         <div class="mc-card-content">
           <div class="about-container">
             <div class="about-image">
-              <img data-src="https://via.placeholder.com/600x800" alt="Virgile Allix" class="about-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=">
+              <img data-src="https://via.placeholder.com/600x800" alt="Virgile Allix" class="about-img"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAApJREFUCNdjYAAAAAIAAeIhvDMAAAAASUVORK5CYII=">
               <div class="floating-shape shape-1"></div>
               <div class="floating-shape shape-2"></div>
             </div>
-            
+
             <div class="about-content">
               <span class="about-subtitle enchant-effect">Développeur passionné en formation</span>
-              
+
               <div class="about-text">
-                <p>Je m'appelle Virgile Allix, j'ai 18 ans et je suis actuellement en première année de BTS SIO option SLAM, en alternance chez MTB111. Passionné par le développement d'applications, je m'efforce de créer des solutions logicielles innovantes et fonctionnelles.</p>
-                <p>Mon parcours technique a commencé avec un Bac STI2D qui m'a permis d'acquérir de solides bases en sciences et technologies de l'industrie. Aujourd'hui, je me spécialise dans le développement d'applications en Java, tout en explorant d'autres technologies comme le développement web, la modélisation 3D et le C#.</p>
-                <p>Comme dans Minecraft, je construis bloc par bloc mes compétences pour réaliser des projets toujours plus ambitieux.</p>
+                <p>Je m'appelle Virgile Allix, j'ai 18 ans et je suis actuellement en première année de BTS SIO option
+                  SLAM, en alternance chez MTB111. Passionné par le développement d'applications, je m'efforce de créer
+                  des solutions logicielles innovantes et fonctionnelles.</p>
+                <p>Mon parcours technique a commencé avec un Bac STI2D qui m'a permis d'acquérir de solides bases en
+                  sciences et technologies de l'industrie. Aujourd'hui, je me spécialise dans le développement
+                  d'applications en Java, tout en explorant d'autres technologies comme le développement web, la
+                  modélisation 3D et le C#.</p>
+                <p>Comme dans Minecraft, je construis bloc par bloc mes compétences pour réaliser des projets toujours
+                  plus ambitieux.</p>
               </div>
-              
+
               <h3 class="skills-subtitle">Compétences techniques</h3>
               <div class="skills-grid">
                 <div class="skill-item ore-effect">
@@ -244,21 +265,21 @@
                   </div>
                   <span class="skill-name">Java</span>
                 </div>
-                
+
                 <div class="skill-item ore-effect">
                   <div class="skill-icon">
                     <i class="fab fa-php" aria-hidden="true"></i>
                   </div>
                   <span class="skill-name">PHP</span>
                 </div>
-                
+
                 <div class="skill-item ore-effect">
                   <div class="skill-icon">
                     <i class="fab fa-html5" aria-hidden="true"></i>
                   </div>
                   <span class="skill-name">HTML/CSS</span>
                 </div>
-                
+
                 <div class="skill-item ore-effect">
                   <div class="skill-icon">
                     <i class="fas fa-database" aria-hidden="true"></i>
@@ -266,7 +287,7 @@
                   <span class="skill-name">SQL</span>
                 </div>
               </div>
-              
+
               <a href="about.html" class="btn btn-primary minecraft-btn dig-effect">
                 En savoir plus
                 <i class="fas fa-arrow-right" aria-hidden="true"></i>
@@ -277,7 +298,7 @@
       </div>
     </div>
   </section>
-  
+
   <section class="section water-effect">
     <div class="container">
       <div class="mc-card">
@@ -288,25 +309,28 @@
           <h2 class="mc-card-title">Mes Compétences</h2>
         </div>
         <div class="mc-card-content">
-          <p class="section-description">Un aperçu des technologies et compétences que j'ai développées au cours de ma formation et de mes expériences professionnelles.</p>
-          
+          <p class="section-description">Un aperçu des technologies et compétences que j'ai développées au cours de ma
+            formation et de mes expériences professionnelles.</p>
+
           <div class="skills-grid animate-on-scroll">
             <div class="skill-card">
               <div class="skill-icon ore-effect">
                 <i class="fas fa-laptop-code" aria-hidden="true"></i>
               </div>
               <h3 class="skill-title">Développement Java</h3>
-              <p class="skill-desc">Applications de bureau avec JavaFX, applications web avec Spring Boot, REST API et gestion de données.</p>
+              <p class="skill-desc">Applications de bureau avec JavaFX, applications web avec Spring Boot, REST API et
+                gestion de données.</p>
             </div>
-            
+
             <div class="skill-card">
               <div class="skill-icon ore-effect">
                 <i class="fas fa-code" aria-hidden="true"></i>
               </div>
               <h3 class="skill-title">Développement Web</h3>
-              <p class="skill-desc">Sites web modernes avec HTML5, CSS3, JavaScript, PHP et frameworks comme Laravel.</p>
+              <p class="skill-desc">Sites web modernes avec HTML5, CSS3, JavaScript, PHP et frameworks comme Laravel.
+              </p>
             </div>
-            
+
             <div class="skill-card">
               <div class="skill-icon ore-effect">
                 <i class="fas fa-database" aria-hidden="true"></i>
@@ -314,7 +338,7 @@
               <h3 class="skill-title">Bases de données</h3>
               <p class="skill-desc">Conception et optimisation de bases de données MySQL, maîtrise du langage SQL.</p>
             </div>
-            
+
             <div class="skill-card">
               <div class="skill-icon ore-effect">
                 <i class="fas fa-cube" aria-hidden="true"></i>
@@ -327,7 +351,7 @@
       </div>
     </div>
   </section>
-  
+
   <section class="section">
     <div class="container">
       <div class="mc-card lava-effect">
@@ -339,7 +363,8 @@
         </div>
         <div class="mc-card-content">
           <div class="cta-container">
-            <p class="cta-text">Je suis ouvert aux opportunités de projets et de collaboration. N'hésitez pas à me contacter pour discuter de votre projet ou pour en savoir plus sur mon parcours.</p>
+            <p class="cta-text">Je suis ouvert aux opportunités de projets et de collaboration. N'hésitez pas à me
+              contacter pour discuter de votre projet ou pour en savoir plus sur mon parcours.</p>
             <a href="contact.html" class="btn btn-primary minecraft-btn dig-effect">
               Me contacter
               <i class="fas fa-arrow-right" aria-hidden="true"></i>
@@ -349,43 +374,13 @@
       </div>
     </div>
   </section>
-  
-  <!-- Barre d'inventaire Minecraft -->
-  <div class="inventory-bar" id="inventory-bar">
-    <div class="inventory-slot selected">
-      <div class="inventory-item" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZmlsbD0iIzhmOGY4ZiIgZD0iTTAgMGgzMnYzMkgweiIvPjxwYXRoIGZpbGw9IiM1NTU1NTUiIGQ9Ik0wIDBoMnYzMkgwem0zMCAwaDJ2MzJoLTJ6TTAgMGgzMnYySDB6bTAgMzBoMzJ2MkgweiIvPjxwYXRoIGZpbGw9IiM2NzlFNjAiIGQ9Ik0yIDJoMjh2MTBIMnoiLz48cGF0aCBmaWxsPSIjOEM2MjNBIiBkPSJNMiAxMmgyOHYxOEgyeiIvPjwvc3ZnPg==');"></div>
-    </div>
-    <div class="inventory-slot">
-      <div class="inventory-item" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZmlsbD0iIzhGOEY4RiIgZD0iTTYgMmgyMHYyOEg2eiIvPjxwYXRoIGZpbGw9IiM1NTU1NTUiIGQ9Ik02IDJoMnYyOEg2em0xOCAwaDF2MjhoLTF6TTYgMmgyMHYxSDZ6bTAgMjdoMjB2MUg2eiIvPjxwYXRoIGZpbGw9IiM1QUM3QzciIGQ9Ik04IDRoMTZ2MjRIOHoiLz48L3N2Zz4=');"></div>
-    </div>
-    <div class="inventory-slot">
-      <div class="inventory-item" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZmlsbD0iI0IxOTAzMyIgZD0iTTExIDZoMTB2MjBIMTF6Ii8+PHBhdGggZmlsbD0iIzdBNjEyMiIgZD0iTTExIDZoMnYyMGgtMnptOCAwaDF2MjBoLTF6TTExIDZoMTB2MUgxMXptMCAxOWgxMHYxSDExeiIvPjxwYXRoIGZpbGw9IiNDRUEzMkEiIGQ9Ik0xMyA3aDZ2MThIMTN6Ii8+PHBhdGggZmlsbD0iIzdBNjEyMiIgZD0iTTYgMTFoMjB2MTBINnoiLz48cGF0aCBmaWxsPSIjQjE5MDMzIiBkPSJNNiAxMWgyMHYySDB6bTAgOGgyMHYySDZ6Ii8+PHBhdGggZmlsbD0iI0NFQTMyQSIgZD0iTTYgMTNoMjB2Nkg2eiIvPjwvc3ZnPg==');"></div>
-    </div>
-    <div class="inventory-slot">
-      <div class="inventory-item" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZmlsbD0iIzc3NyIgZD0iTTMgNmgyNnY0SDN6Ii8+PHBhdGggZmlsbD0iIzk5OSIgZD0iTTMgMTBoMjZ2MTZIM3oiLz48cGF0aCBmaWxsPSIjNTU1IiBkPSJNMyA2aDJ2MjBIM3ptMjQgMGgydjIwaC0yek0zIDZoMjZ2Mkgzem0wIDE4aDI2djJIM3oiLz48cGF0aCBmaWxsPSIjNDQ0IiBkPSJNMTMgMTRoNnY4aC02em0xIDFoNHY2aC00eiIvPjwvc3ZnPg==');"></div>
-    </div>
-    <div class="inventory-slot">
-      <div class="inventory-item" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZmlsbD0iIzk5NzY0MyIgZD0iTTkgNGgxNHYyNEg5eiIvPjxwYXRoIGZpbGw9IiM3NzVCMzUiIGQ9Ik05IDRoMnYyNEg5em0xMiAwaDF2MjRoLTF6TTkgNGgxNHYxSDl6bTAgMjNoMTR2MUg5eiIvPjxwYXRoIGZpbGw9IiNBRDg5NEYiIGQ9Ik0xMSA1aDEwdjIySDExeiIvPjwvc3ZnPg==');"></div>
-    </div>
-    <div class="inventory-slot">
-      <div class="inventory-item" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZmlsbD0iIzQxNDE0MSIgZD0iTTIgNGgyOHYyMEgyek0yIDI0aDI4djRIMnoiLz48cGF0aCBmaWxsPSIjNTk1OTU5IiBkPSJNMiA0aDJ2MjRIMnptMjYgMGgydjI0aC0yek0yIDRoMjh2Mkgyem0wIDIyaDI4djJIMnoiLz48cGF0aCBmaWxsPSIjOEI4QjhCIiBkPSJNNCA2aDI0djE4SDR6bTAgMThoMjR2MUg0eiIvPjxwYXRoIGZpbGw9IiM3Nzc3NzciIGQ9Ik00IDZoMXYxOUg0em0yMyAwaDF2MTloLTF6Ii8+PHBhdGggZmlsbD0iI0E1QTVBNSIgZD0iTTUgN2gyMnYxN0g1eiIvPjxwYXRoIGZpbGw9IiM1QUM3QzciIGQ9Ik01IDE1aDIydjlINXoiLz48cGF0aCBmaWxsPSIjM0E4QThBIiBkPSJNNSAxNWgyMnYxSDV6bTAgOGgyMnYxSDV6Ii8+PC9zdmc+');"></div>
-    </div>
-    <div class="inventory-slot">
-      <div class="inventory-item" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZmlsbD0iIzk5OTk5OSIgZD0iTTEwIDVoMTN2N0gxMHoiLz48cGF0aCBmaWxsPSIjNzc3Nzc3IiBkPSJNMTAgNWgxdjdoLTF6bTEyIDBwMXY3aC0xek0xMCA1aDEzdjFIMTB6bTAgNmgxM3YxSDEweiIvPjxwYXRoIGZpbGw9IiNBQUFBQUEiIGQ9Ik0xMSA2aDExdjVIMTF6Ii8+PHBhdGggZmlsbD0iIzc3Nzc3NyIgZD0iTTEzIDE0aDd2MTNoLTd6Ii8+PHBhdGggZmlsbD0iIzU1NTU1NSIgZD0iTTEzIDE0aDF2MTNoLTF6bTYgMGgxdjEzaC0xek0xMyAxNGg3djFoLTd6bTAgMTJoN3YxaC03eiIvPjxwYXRoIGZpbGw9IiM4ODg4ODgiIGQ9Ik0xNCAxNWg1djExaC01eiIvPjxwYXRoIGZpbGw9IiNCRDdCMDAiIGQ9Ik0xMC41IDEyaDEydjJoLTEyeiIvPjxwYXRoIGZpbGw9IiM5MzYwMDAiIGQ9Ik0xMC41IDEyaDF2MmgtMXptMTEgMGgxdjJoLTF6TTEwLjUgMTJoMTJ2MWgtMTJ6bTAgMWgxMnYxaC0xMnoiLz48cGF0aCBmaWxsPSIjRUE5NjAwIiBkPSJNMTEuNSAxM2gxMHYyaC0xMHoiLz48L3N2Zz4=');"></div>
-    </div>
-    <div class="inventory-slot">
-      <div class="inventory-item" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZmlsbD0iI0JEMDAwMCIgZD0iTTExIDEzaDEwdjEwSDExeiIvPjxwYXRoIGZpbGw9IiM4MjAwMDAiIGQ9Ik0xMSAxM2gxdjEwaC0xem05IDBwMXYxMGgtMXpNMTEgMTNoMTB2MUgxMXptMCA5aDEwdjFIMTF6Ii8+PHBhdGggZmlsbD0iI0YyMDAwMCIgZD0iTTEyIDE0aDh2OGgtOHoiLz48L3N2Zz4=');"></div>
-    </div>
-    <div class="inventory-slot">
-      <div class="inventory-item" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHBhdGggZmlsbD0iIzU0MEIwNyIgZD0iTTkgOWgxNXYxNUg5eiIvPjxwYXRoIGZpbGw9IiMzQjA4MDUiIGQ9Ik05IDloMXYxNUg5em0xNCAwcDF2MTVoLTF6TTkgOWgxNXYxSDl6bTAgMTRoMTV2MUg5eiIvPjxwYXRoIGZpbGw9IiM2MzBEMDgiIGQ9Ik0xMCAxMGgxM3YxM0gxMHoiLz48L3N2Zz4=');"></div>
-    </div>
-  </div>
-  
+
   <footer class="footer">
     <div class="container footer-container">
       <div class="footer-info">
         <a href="index.html" class="footer-logo ore-effect">Virgile<span>.</span>Allix</a>
-        <p class="footer-text">Étudiant en BTS SIO SLAM et développeur en alternance chez MTB111, passionné par la création d'applications et de cybersécurité.</p>
+        <p class="footer-text">Étudiant en BTS SIO SLAM et développeur en alternance chez MTB111, passionné par la
+          création d'applications et de cybersécurité.</p>
         <div class="social-links">
           <a href="#" class="social-link dig-effect" aria-label="GitHub">
             <i class="fab fa-github" aria-hidden="true"></i>
@@ -401,7 +396,7 @@
           </a>
         </div>
       </div>
-      
+
       <div class="footer-links">
         <div class="footer-column">
           <h3>Navigation</h3>
@@ -412,7 +407,7 @@
             <a href="contact.html" class="redstone-hover">Contact</a>
           </nav>
         </div>
-        
+
         <div class="footer-column">
           <h3>Compétences</h3>
           <nav class="footer-nav">
@@ -424,28 +419,34 @@
         </div>
       </div>
     </div>
-    
+
     <div class="container">
       <div class="copyright">
         &copy; 2025 Virgile Allix. Tous droits réservés.
       </div>
     </div>
   </footer>
-  
+
   <div class="cookie-banner" id="cookie-banner">
     <div class="cookie-text">
-      <p>Ce site utilise des cookies pour améliorer votre expérience. En continuant à naviguer, vous acceptez notre utilisation des cookies.</p>
+      <p>Ce site utilise des cookies pour améliorer votre expérience. En continuant à naviguer, vous acceptez notre
+        utilisation des cookies.</p>
     </div>
     <div class="cookie-buttons">
       <button class="btn btn-outline dig-effect" id="cookie-accept">Accepter</button>
       <button class="btn btn-primary minecraft-btn dig-effect" id="cookie-settings">Paramètres</button>
     </div>
   </div>
+  
 
   <script src="script.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
   <script src="minecraft-builder-3d.js"></script>
+  <script src="sounds.js"></script>
+  <script src="achievements.js"></script>
+  <script src="minigames.js"></script>
   <script src="easter-eggs.js"></script>
 </body>
+
 </html>
